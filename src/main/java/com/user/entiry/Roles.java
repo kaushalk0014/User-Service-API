@@ -1,9 +1,13 @@
 package com.user.entiry;
 
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Table(name = "roles_details")
@@ -11,6 +15,8 @@ import jakarta.persistence.Table;
 public class Roles {
 
 	@Id
+	@SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
 	private Integer roleId;
 	private String roleName;
 

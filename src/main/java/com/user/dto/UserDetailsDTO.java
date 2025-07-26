@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserDetailsDTO {
 
-	private Integer userId;
+	private String userId;
 	private String username;
 	private String gender;
 	private String password;
@@ -15,11 +15,11 @@ public class UserDetailsDTO {
 	private Date updatedDate;
 	private List<RolesDTO> roles;
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

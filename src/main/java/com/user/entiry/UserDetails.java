@@ -2,11 +2,15 @@ package com.user.entiry;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import org.springframework.data.annotation.Transient;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Table(name = "user_details")
@@ -14,23 +18,29 @@ public class UserDetails {
 
 	@Id
 	@Column(name = "user_id")
-	private Integer userId;
+	private String userId;
 	private String username;
 	private String gender;
+	@Transient
 	private String password;
 	private String mobileNo;
 	private String isActice;
 	private Date createdDate;
 	private Date updatedDate;
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
 	private List<Roles> roles;
 
-	public Integer getUserId() {
+	@PrePersist
+	public void generateId() {
+		 this.userId = "USR" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -97,7 +107,5 @@ public class UserDetails {
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
-	
-	
 
 }

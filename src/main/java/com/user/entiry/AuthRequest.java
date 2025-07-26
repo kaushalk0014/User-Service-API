@@ -16,9 +16,6 @@ public class AuthRequest {
 	private String username;
 	private String password;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> roles;
-
 	public String getUsername() {
 		return username;
 	}
@@ -35,19 +32,11 @@ public class AuthRequest {
 		this.password = password;
 	}
 
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-
 	@Override
 	public String toString() {
-		return "AuthRequest [username=" + username + ", password=" + password + ", roles=" + roles + "]";
+		return "AuthRequest [username=" + username + ", password=" + password + "]";
 	}
-
-	 
+	
+	
 
 }

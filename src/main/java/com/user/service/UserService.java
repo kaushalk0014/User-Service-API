@@ -11,6 +11,9 @@ import com.user.dao.UserCredentialsRepositry;
 import com.user.dao.UserRepositry;
 import com.user.dto.UserDetailsDTO;
 import com.user.entiry.AuthRequest;
+import com.user.entiry.UserDetails;
+import com.user.exception.UserCreationException;
+import com.user.mapper.UserMapper;
 
 @Service
 public class UserService {
@@ -22,11 +25,24 @@ public class UserService {
 	private UserCredentialsRepositry credentialsRepositry;
 	
 	public void registerUser(UserDetailsDTO user) {
-		saveUserCredentials(null);
+		
+		if(userRepositry.isPresentUserByUsername(user.getUsername()).isPresent()) {
+			throw new UserCreationException("Usrename : "+user.getUsername()+ " already exist, Try with other username");
+		}
+		
+		UserDetails userDetails= UserMapper.toEntity(user);
+		userRepositry.save(userDetails);
+		
+		saveUserCredentials(user);
 	}
 	
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	private void saveUserCredentials(AuthRequest authRequest) {
+	private void saveUserCredentials(UserDetailsDTO user) {
+		
+		AuthRequest authRequest= new AuthRequest();
+		authRequest.setUsername(user.getUsername());
+		authRequest.setPassword(user.getPassword());
+		
+		
 		credentialsRepositry.save(authRequest);
 	}
 
