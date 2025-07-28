@@ -8,12 +8,14 @@ import org.springframework.data.annotation.Transient;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Table(name = "user_details")
+@Entity
 public class UserDetails {
 
 	@Id
@@ -21,8 +23,6 @@ public class UserDetails {
 	private String userId;
 	private String username;
 	private String gender;
-	@Transient
-	private String password;
 	private String mobileNo;
 	private String isActice;
 	private Date createdDate;
@@ -58,14 +58,6 @@ public class UserDetails {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getMobileNo() {
