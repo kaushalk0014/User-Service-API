@@ -64,6 +64,11 @@
 			<artifactId>spring-security-crypto</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.exception.app</groupId>
+			<artifactId>Common-Exception-API</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

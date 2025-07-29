@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.exception.app.exception.UserCreationException;
 import com.user.dao.UserCredentialsRepositry;
 import com.user.dao.UserRepositry;
 import com.user.dto.UserDetailsDTO;
 import com.user.entiry.AuthRequest;
 import com.user.entiry.UserDetails;
-import com.user.exception.UserCreationException;
 import com.user.mapper.UserMapper;
 
 @Service
