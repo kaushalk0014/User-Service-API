@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.exception.app.exception.ResourceNotFoundException;
 import com.exception.app.exception.UserCreationException;
 import com.user.dao.UserCredentialsRepositry;
 import com.user.dao.UserRepositry;
@@ -55,9 +56,12 @@ public class UserService {
 		credentialsRepositry.save(authRequest);
 	}
 
-	public UserDetailsDTO getUserById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDetailsDTO getUserById(String id) {
+		
+		UserDetails userDetails = userRepositry.findById(id).orElseThrow(
+				()->new ResourceNotFoundException("User not found with id : "+id));
+		
+		return UserMapper.toDTO(userDetails);
 	}
 
 	public UserDetailsDTO getUserByName(String name) {

@@ -32,7 +32,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserDetailsDTO> getUserById(@PathVariable(name = "id") Integer id) {
+	public ResponseEntity<UserDetailsDTO> getUserById(@PathVariable(name = "id") String id) {
 		UserDetailsDTO user = userService.getUserById(id);
 		return new ResponseEntity<UserDetailsDTO>(user, HttpStatus.OK);
 	}

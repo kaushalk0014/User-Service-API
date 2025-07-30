@@ -3,6 +3,7 @@ package com.user.mapper;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import com.user.dto.RolesDTO;
 import com.user.dto.UserDetailsDTO;
 import com.user.entiry.Roles;
 import com.user.entiry.UserDetails;
@@ -31,4 +32,28 @@ public class UserMapper {
 		 
 		 return details;
 	 }
+
+	public static UserDetailsDTO toDTO(UserDetails userDetails) {
+		
+		UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
+		
+		userDetailsDTO.setGender(userDetails.getGender());
+		userDetailsDTO.setIsActice(userDetails.getIsActice());
+		userDetailsDTO.setMobileNo(userDetails.getMobileNo());
+		userDetailsDTO.setCreatedDate(userDetails.getCreatedDate());
+		userDetailsDTO.setUpdatedDate(userDetails.getUpdatedDate());
+		userDetailsDTO.setUserId(userDetails.getUserId());
+		userDetailsDTO.setUsername(userDetails.getUsername());
+		 
+		userDetailsDTO.setRoles(userDetails.getRoles().stream().map(role->{
+			 RolesDTO roles = new RolesDTO();
+			 
+			 roles.setRoleName(role.getRoleName());
+			 //roles.setUser(userDetailsDTO);
+			 
+			 return roles;
+		 }).collect(Collectors.toList()));
+		 
+		 return userDetailsDTO;
+	}
 }
