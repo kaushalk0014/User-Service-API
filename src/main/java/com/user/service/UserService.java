@@ -70,8 +70,8 @@ public class UserService {
 	}
 
 	public List<UserDetailsDTO> getAllUser() {
-		// TODO Auto-generated method stub
-		return null;
+		List<UserDetails> list =userRepositry.findAll();
+		return UserMapper.toDTO(list);
 	}
 
 }

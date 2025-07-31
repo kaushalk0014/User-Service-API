@@ -1,6 +1,7 @@
 package com.user.mapper;
 
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.user.dto.RolesDTO;
@@ -55,5 +56,9 @@ public class UserMapper {
 		 }).collect(Collectors.toList()));
 		 
 		 return userDetailsDTO;
+	}
+
+	public static List<UserDetailsDTO> toDTO(List<UserDetails> list) {
+		return list.stream().map(UserMapper::toDTO).collect(Collectors.toList());
 	}
 }
