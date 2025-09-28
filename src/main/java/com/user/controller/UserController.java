@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.user.dto.UserDetailsDTO;
 import com.user.service.UserService;
 
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -31,13 +32,13 @@ public class UserController {
 				.body("Registetion done successfully");
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<UserDetailsDTO> getUserById(@PathVariable(name = "id") String id) {
 		UserDetailsDTO user = userService.getUserById(id);
 		return new ResponseEntity<UserDetailsDTO>(user, HttpStatus.OK);
 	}
 
-	@GetMapping("/{name}")
+	@GetMapping("/name/{name}")
 	public ResponseEntity<UserDetailsDTO> getUserByName(@RequestParam(name="name") String name) {
 		UserDetailsDTO user = userService.getUserByName(name);
 		return new ResponseEntity<UserDetailsDTO>(user, HttpStatus.OK);
